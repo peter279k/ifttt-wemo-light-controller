@@ -24,7 +24,7 @@ with open(setting_path, 'r') as file_handler:
         sys.exit(1)
 
     switch_on_request = urllib.request.Request(ifttt_service_on_url[21:])
-    switch_off_request = urllib.request.Request(ifttt_service_on_url[22:])
+    switch_off_request = urllib.request.Request(ifttt_service_off_url[22:])
 
     switch_on_request.add_header('Content-Type', 'application/json; charset=utf-8')
     json_payload = {
