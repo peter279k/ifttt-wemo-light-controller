@@ -1,0 +1,2 @@
+ifttt_service_on_url=https://maker.ifttt.com/trigger/event/json/with/key/maker-service-key
+ifttt_service_off_url=https://maker.ifttt.com/trigger/event/json/with/key/maker-service-key
