@@ -4,6 +4,16 @@ import json
 import datetime
 import urllib.request
 
+
+args = sys.argv
+if len(args) < 1:
+    print('Missing light control arg!')
+    sys.exit(1)
+if args[1] != 'on' and args[1] != 'off':
+    print('Light control arg should be on or off!')
+    sys.exit(1)
+
+light_control = args[1]
 setting_path = './settings.txt'
 if os.path.isfile(setting_path) is False:
     print(setting_path + ' is not found.')
@@ -38,14 +48,15 @@ with open(setting_path, 'r') as file_handler:
     switch_on_request.add_header('Content-Length', len(json_data_bytes))
     switch_on_response = urllib.request.urlopen(switch_on_request, json_data_bytes)
     on_resp_text = switch_on_response.readlines()
+    if switch_on_response.status == 200:
+        print(on_resp_text[0].decode('utf-8'))
+    if light_control == 'on':
+        sys.exit(0)
 
     switch_off_request.add_header('Content-Type', 'application/json; charset=utf-8')
     switch_off_request.add_header('Content-Length', len(json_data_bytes))
     switch_off_response = urllib.request.urlopen(switch_off_request, json_data_bytes)
     off_resp_text = switch_off_response.readlines()
-
-    if switch_on_response.status == 200:
-        print(on_resp_text[0].decode('utf-8'))
 
     if switch_off_response.status == 200:
         print(off_resp_text[0].decode('utf-8'))
