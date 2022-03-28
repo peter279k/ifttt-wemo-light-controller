@@ -44,12 +44,12 @@ with open(setting_path, 'r') as file_handler:
     jsondata = json.dumps(json_payload)
     json_data_bytes = jsondata.encode('utf-8')
 
-    switch_on_request.add_header('Content-Length', len(json_data_bytes))
-    switch_on_response = urllib.request.urlopen(switch_on_request, json_data_bytes)
-    on_resp_text = switch_on_response.readlines()
-    if switch_on_response.status == 200:
-        print(on_resp_text[0].decode('utf-8'))
     if light_control == 'on':
+        switch_on_request.add_header('Content-Length', len(json_data_bytes))
+        switch_on_response = urllib.request.urlopen(switch_on_request, json_data_bytes)
+        on_resp_text = switch_on_response.readlines()
+        if switch_on_response.status == 200:
+            print(on_resp_text[0].decode('utf-8'))
         sys.exit(0)
 
     switch_off_request = urllib.request.Request(ifttt_service_off_url[22:])
