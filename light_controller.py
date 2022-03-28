@@ -34,7 +34,6 @@ with open(setting_path, 'r') as file_handler:
         sys.exit(1)
 
     switch_on_request = urllib.request.Request(ifttt_service_on_url[21:])
-    switch_off_request = urllib.request.Request(ifttt_service_off_url[22:])
 
     switch_on_request.add_header('Content-Type', 'application/json; charset=utf-8')
     json_payload = {
@@ -53,6 +52,7 @@ with open(setting_path, 'r') as file_handler:
     if light_control == 'on':
         sys.exit(0)
 
+    switch_off_request = urllib.request.Request(ifttt_service_off_url[22:])
     switch_off_request.add_header('Content-Type', 'application/json; charset=utf-8')
     switch_off_request.add_header('Content-Length', len(json_data_bytes))
     switch_off_response = urllib.request.urlopen(switch_off_request, json_data_bytes)
